@@ -52,17 +52,21 @@ class Solution(object):
         output = 0
 
         while i < len(nums):
-            if i == j: # if the indexs are the same then go to the next iteration with j += 1
+            if i == j: # If the indexs are the same then go to the next iteration with j += 1
                 j += 1
                 continue
 
-            if j == len(nums): # if j gets to end of the array then set j back to the beginning and increment i
+            if j == len(nums): # If j gets to end of the array then set j back to the beginning and increment i
                 j = 0
                 i += 1
                 continue
 
-            if nums[i] + nums[j] == target: # if i have found the correct elements then increment
+            if nums[i] + nums[j] == target: # If i have found the correct elements then increment
                 output += 1
             j += 1
             
         return output
+
+# Time Complexity - O(n^2) - The while loop iterates through the whole array twice as both i and j goes through all of the elements. O(n^2)
+# Space Complexity - O(1) - I am not taking up any space relative to the elements within the array. All of my variables are independant and don't consider array size.
+
