@@ -1,48 +1,68 @@
-# Question Number: 1663. Smallest String With A Given Numeric Value
-# Difficulty: Medium
+# 2023. Number of Pairs of Strings With Concatenation Equal to Target
 
-# Problem Link: https://leetcode.com/problems/smallest-string-with-a-given-numeric-value/
-
-# Problem Description:
-# The numeric value of a lowercase character is defined as its position (1-indexed) in the alphabet, so the numeric value of a is 1, the numeric value of b is 2, the numeric value of c is 3, and so on.
-# The numeric value of a string consisting of lowercase characters is defined as the sum of its characters' numeric values. For example, the numeric value of the string "abe" is equal to 1 + 2 + 5 = 8.
-# You are given two integers n and k. Return the lexicographically smallest string with length equal to n and numeric value equal to k.
-
-# Note that a string x is lexicographically smaller than string y if x comes before y in dictionary order, that is, either x is a prefix of y, or if i is the first position such that x[i] != y[i], then x[i] comes before y[i] in alphabetic order.
+# Given an array of digit strings nums and a digit string target, return the number of pairs of indices (i, j) (where i != j) such that the concatenation of nums[i] + nums[j] equals target.
 
 # Example 1:
 
-# Input: n = 3, k = 27
-# Output: "aay"
-# Explanation: The numeric value of the string is 1 + 1 + 25 = 27, and it is the smallest string with such a value and length equal to 3.
-
+# Input: nums = ["777","7","77","77"], target = "7777"
+# Output: 4
+# Explanation: Valid pairs are:
+# - (0, 1): "777" + "7"
+# - (1, 0): "7" + "777"
+# - (2, 3): "77" + "77"
+# - (3, 2): "77" + "77"
 # Example 2:
 
-# Input: n = 5, k = 73
-# Output: "aaszz"
+# Input: nums = ["123","4","12","34"], target = "1234"
+# Output: 2
+# Explanation: Valid pairs are:
+# - (0, 1): "123" + "4"
+# - (2, 3): "12" + "34"
+# Example 3:
+
+# Input: nums = ["1","1","1"], target = "11"
+# Output: 6
+# Explanation: Valid pairs are:
+# - (0, 1): "1" + "1"
+# - (1, 0): "1" + "1"
+# - (0, 2): "1" + "1"
+# - (2, 0): "1" + "1"
+# - (1, 2): "1" + "1"
+# - (2, 1): "1" + "1"
 
 # Constraints:
 
-# 1 <= n <= 105
-# n <= k <= 26 * n
+# 2 <= nums.length <= 100
+# 1 <= nums[i].length <= 100
+# 2 <= target.length <= 100
+# nums[i] and target consist of digits.
+# nums[i] and target do not have leading zeros.
+
+# My Solution: 
 
 class Solution(object):
-    def getSmallestString(n, k):
-        # Start with all 'a's
-        result = ['a'] * n
+    def numOfPairs(self, nums, target):
+        """
+        :type nums: List[str]
+        :type target: str
+        :rtype: int
+        """
         
-        # Total value we still need to distribute
-        remaining = k - n  # because we already have n * 1 from 'a's
-        
-        # Fill from the end to make it lexicographically smallest
-        i = n - 1
-        while remaining > 0:
-            add = min(25, remaining)  # max we can add to a character
-            result[i] = chr(ord('a') + add)  # convert to character
-            remaining -= add
-            i -= 1
-        
-        return ''.join(result)
-    
-# print(Solution.getSmallestString(3, 27))
-# print(Solution.getSmallestString(5, 73))
+        i, j = 0 , 0 # two point strat
+        output = 0
+
+        while i < len(nums):
+            if i == j: # if the indexs are the same then go to the next iteration with j += 1
+                j += 1
+                continue
+
+            if j == len(nums): # if j gets to end of the array then set j back to the beginning and increment i
+                j = 0
+                i += 1
+                continue
+
+            if nums[i] + nums[j] == target: # if i have found the correct elements then increment
+                output += 1
+            j += 1
+            
+        return output
