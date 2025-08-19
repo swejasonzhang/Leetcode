@@ -33,8 +33,8 @@ class Solution(object):
         result = [x for x in nums if x not in remove] # Create a new array excluding smallest and larget numbers since every element will have a larger and smaller element if not the smallest and largest
         return len(result) 
 
-# Time Complexity - O(n) - Finding the smallest and largest numbers iterates through the whole array. List comprehension takes O(n) as well. 0(N + N + N) = 0(n). N being the number of elements in the list.
-# Space Complexity - O(n) - Result up to the amount of elements in nums. Remove is just 2 elements regardless of element size. O(N) + O(1) = O(N). N still being the number of elements in the list.
+# Time Complexity - O(N) - Finding the smallest and largest numbers iterates through the whole array. List comprehension takes O(N) as well. O(N + N + N) = O(N). N being the number of elements in the list.
+# Space Complexity - O(N) - Result up to the amount of elements in nums. Remove is just 2 elements regardless of element size. O(N) + O(1) = O(N). N still being the number of elements in the list.
 
 # 1221. Split a String in Balanced Strings 
 
@@ -92,5 +92,55 @@ class Solution(object):
 
         return counter
     
-# Time Complexity - O(n) - The while loop iterates through the whole string "s" to check for substrings that are balanced.
+# Time Complexity - O(N) - The while loop iterates through the whole string "s" to check for substrings that are balanced.
 # Space Complexity - O(1) - The variables don't factor the string s into consideration so space will always be constant regardless of input size.
+
+# 766. Toeplitz Matrix
+
+# Given an m x n matrix, return true if the matrix is Toeplitz. Otherwise, return false.
+
+# A matrix is Toeplitz if every diagonal from top-left to bottom-right has the same elements.
+
+# Example 1:
+
+# Input: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
+# Output: true
+# Explanation:
+# In the above grid, the diagonals are:
+# "[9]", "[5, 5]", "[1, 1, 1]", "[2, 2, 2]", "[3, 3]", "[4]".
+# In each diagonal all elements are the same, so the answer is True.
+# Example 2:
+
+
+# Input: matrix = [[1,2],[2,2]]
+# Output: false
+# Explanation:
+# The diagonal "[1, 2]" has different elements.
+ 
+
+# Constraints:
+
+# m == matrix.length
+# n == matrix[i].length
+# 1 <= m, n <= 20
+# 0 <= matrix[i][j] <= 99
+
+class Solution(object):
+    def isToeplitzMatrix(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: bool
+        """
+
+        rows = len(matrix) # Rows will always be the outter number of arrays
+        cols = len(matrix[0]) # Columns will be the inner number of elements
+         
+        for r in range(rows - 1): # Rows from 0 to 3 but with the subtraction since we don't care about the last row nor column so it's more 0-2
+            for c in range(cols - 1): # Cols from 0 to 3 but with the subtraction since we don't care about the last row nor column so it's more 0-2
+                if matrix[r][c] != matrix[r + 1][c + 1]: # We compare the element to the bottom right of it and if it doesn match then it's not a Toeplitz Matrix
+                    return False
+
+        return True
+    
+# Time Complexity - O(M * N) - The first loop iterates through all of the elements which is O(M) and the second is nested within it which is O(N) which makes it O(M * N). M being the amount of rows and N being the amount of columns since not every matrix is equal.
+# Space Complexity - O(1) - The variables don't factor the matrix into consideration so space will always be constant regardless of input size.
