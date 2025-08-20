@@ -105,28 +105,79 @@ class Solution(object):
         :type answers: List[int]
         :rtype: int
         """
-        
-        count = {} # Dict to keep track of frequency
-        counter = 0 # Count of rabbits
+        count = {}
+        total = 0
 
         for num in answers:
-            if num == 0: # If there is an unique rabbit then increment and skip as there is not another rabbit like it.
-                counter += 1
-                continue
-
-            if num not in count: # If a new rabbit is discovered and not unique then set the value as the key since that would mean there are "num" amount of rabbits like it besides itself.
-                count[num] = num
-                counter += 1
-                continue
-
-            if count[num] == 0: # Rabbit existed and found the others but found more like it. 
-                count[num] = num
+            if num not in count or count[num] == 0:
+                total += num + 1 # Start a new group of size num + 1
+                count[num] = num  # we've used 1, so num left
             else:
-                count[num] -= 1
+                count[num] -= 1 # Fill an existing group
 
-            counter += 1
-
-        return sum(count.values()) + counter # Total amount of rabbits
+        return total
     
 # Time Complexity - O(N) - The for loop iterates through every element within the array. N refers to the length of the answers array. 
 # Space Complexity - O(N) - As for space complexity, this solutions uses O(N) as we are storing elements relative to the input within the dictionary to keep track of frequency.
+
+# 763. Partition Labels
+# You are given a string s. We want to partition the string into as many parts as possible so that each letter appears in at most one part. For example, the string "ababcc" can be partitioned into ["abab", "cc"], but partitions such as ["aba", "bcc"] or ["ab", "ab", "cc"] are invalid.
+# Note that the partition is done so that after concatenating all the parts in order, the resultant string should be s.
+
+# Approach: Two pointer strategy, use .rfind to the latest index with every char. Set both I and J to 0. If J gets to the latest index let's say greatestIndex then that would mean it's the shortest partition we can get. Then we record the length and append and keep going through out the whole array. 
+
+# Return a list of integers representing the size of these parts.
+
+# Example 1:
+
+# Input: s = "ababcbacadefegdehijhklij"
+# Output: [9,7,8]
+# Explanation:
+# The partition is "ababcbaca", "defegde", "hijhklij".
+# This is a partition so that each letter appears in at most one part.
+# A partition like "ababcbacadefegde", "hijhklij" is incorrect, because it splits s into less parts.
+
+# Example 2:
+
+# Input: s = "eccbbbbdec"
+# Output: [10]
+ 
+
+# Constraints:
+
+# 1 <= s.length <= 500
+# s consists of lowercase English letters.
+
+class Solution(object):
+    def partitionLabels(self, s):
+        """
+        :type s: str
+        :rtype: List[int]
+        """
+        
+        result = []
+        i , j = 0 , 0
+        greatestIndex = 0 # variable to hold the greatest index
+
+        while j < len(s):
+            char = s[j]
+
+            if s.rfind(char) == -1: # If the char doesn't repeat again the continue to the next char
+                j += 1
+                continue
+
+            if s.rfind(char) > greatestIndex: # Typical greatest logic
+                greatestIndex = s.rfind(char)
+            
+            if j == greatestIndex: # If we reach the greatest record the length and append then move on to the next char while setting I as well for a new substring
+                substring = s[i: j + 1]
+                result.append(len(substring))
+                j += 1
+                i = j
+            else:
+                j += 1
+
+        return result
+    
+# Time Complexity - O(N) - The while loop iterates through the whole string once to check for valid partitions. In this case N refers to the length of the string. 
+# Space Complexity - O(1) - I am not taking up any space relative to the chars within the string. All of my variables are independant and don't consider string size.
