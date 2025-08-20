@@ -127,3 +127,6 @@ class Solution(object):
             counter += 1
 
         return sum(count.values()) + counter # Total amount of rabbits
+    
+# Time Complexity - O(N) - The for loop iterates through every element within the array. N refers to the length of the answers array. 
+# Space Complexity - O(N) - As for space complexity, this solutions uses O(N) as we are storing elements relative to the input within the dictionary to keep track of frequency.
