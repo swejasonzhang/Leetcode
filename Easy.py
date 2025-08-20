@@ -1,6 +1,8 @@
 # 2148. Count Elements With Strictly Smaller and Greater Elements 
 # Given an integer array nums, return the number of elements that have both a strictly smaller and a strictly greater element appear in nums.
 
+# Approach: Sort the array by numeric values then disregard the first and last elements as the smallest wont have a smaller element and the same with the greatest element. Then count the elements in between.
+
 # Example 1:
 
 # Input: nums = [11,7,2,15]
@@ -40,6 +42,8 @@ class Solution(object):
 # Given a balanced string s, split it into some number of substrings such that:
 # Each substring is balanced.
 # Return the maximum number of balanced strings you can obtain.
+
+# Approach: Use the sliding window approach then make sure the count of every substring is equal by using count of L and R. 
 
 # Example 1:
 
@@ -96,6 +100,8 @@ class Solution(object):
 # Given an m x n matrix, return true if the matrix is Toeplitz. Otherwise, return false.
 # A matrix is Toeplitz if every diagonal from top-left to bottom-right has the same elements.
 
+# Approach: Disregard the last row and column, Make sure for each element we are on check the next diagonal element aka [r + 1] , [c + 1]. If they are the same element then it works.
+
 # Example 1:
 
 # Input: matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
@@ -146,6 +152,8 @@ class Solution(object):
 # Note that if there are multiple occurrences of the same substring, every occurrence should be counted.
 # A substring is a contiguous sequence of characters in a string.
 
+# Approach: Sliding window method, make sure the substring has a length of 3. In other words 0-2. After checking increment I and J by one and check uniqueness. 
+
 # Example 1:
 
 # Input: s = "xyzzaz"
@@ -187,4 +195,3 @@ class Solution(object):
     
 # Time Complexity - O(N) - The while loop iterates through every element. N is defined as the amount of chars in the string.
 # Space Complexity - O(1) - The variables don't factor the string into consideration so space will always be constant regardless of input size.
-
