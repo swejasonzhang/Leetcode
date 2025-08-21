@@ -200,6 +200,8 @@ class Solution(object):
 # Given an integer n, return true if it is a power of three. Otherwise, return false.
 # An integer n is a power of three, if there exists an integer x such that n == 3x.
 
+# Approach: Go up from 3 and multiply the result by 3, at some point it will match n or go over it. If it matches then it's true and if it goes cover then it's false. N == 1 is true as 1 is a power of any number.
+
 # Example 1:
 
 # Input: n = 27
@@ -243,6 +245,8 @@ class Solution(object):
     
 # Time Complexity - O(N) - Worst case scenerio the while loop has to iterate up to N. N being the number we are trying to check if is a power of 3.
 # Space Complexity - O(1) - The input is just a number and my varibles don't take that into account.
+
+# Approach: Go down from N, keep dividing by 3 and if it ends up being 1 then we know the number is a power of 3 as 1 is the smallest power of three.
 
 class Solution(object):
     def improvedIsPowerOfThree(self, n):
