@@ -195,3 +195,51 @@ class Solution(object):
     
 # Time Complexity - O(N) - The while loop iterates through every element. N is defined as the amount of chars in the string.
 # Space Complexity - O(1) - The variables don't factor the string into consideration so space will always be constant regardless of input size.
+
+# 326. Power of Three
+# Given an integer n, return true if it is a power of three. Otherwise, return false.
+# An integer n is a power of three, if there exists an integer x such that n == 3x.
+
+# Example 1:
+
+# Input: n = 27
+# Output: true
+# Explanation: 27 = 33
+
+# Example 2:
+
+# Input: n = 0
+# Output: false
+# Explanation: There is no x where 3x = 0.
+# Example 3:
+
+# Input: n = -1
+# Output: false
+# Explanation: There is no x where 3x = (-1).
+ 
+# Constraints:
+
+# -231 <= n <= 231 - 1
+
+class Solution(object):
+    def isPowerOfThree(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        if n == 1: # 1 is a power of 3
+            return True
+
+        result = 3 # Start off with three
+
+        while result <= n: # While we haven't passed over the number
+            if result == n: # This means n is a power of 3
+                return True
+            elif result > n: # If we pass over n then that must mean it's not a power of 3
+                return False
+
+            result = result * 3
+        return False
+    
+# Time Complexity - O(N) - Worst case scenerio the while loop has to iterate up to N. N being the number we are trying to check if is a power of 3.
+# Space Complexity - O(1) - The input is just a number and my varibles don't take that into account.

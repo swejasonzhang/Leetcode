@@ -181,3 +181,4 @@ class Solution(object):
     
 # Time Complexity - O(N) - The while loop iterates through the whole string once to check for valid partitions. In this case N refers to the length of the string. 
 # Space Complexity - O(1) - I am not taking up any space relative to the chars within the string. All of my variables are independant and don't consider string size.
+
