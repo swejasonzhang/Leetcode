@@ -243,3 +243,20 @@ class Solution(object):
     
 # Time Complexity - O(N) - Worst case scenerio the while loop has to iterate up to N. N being the number we are trying to check if is a power of 3.
 # Space Complexity - O(1) - The input is just a number and my varibles don't take that into account.
+
+class Solution(object):
+    def improvedIsPowerOfThree(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        if n < 1: # Numbers less than 1 can't be powers of three
+            return False
+        
+        while n % 3 == 0: # If the number is fully divisible by 3 continue
+            n //= 3 # Reassign n to the remainder of n divided by 3 
+        
+        return n == 1 # If n ends up being 1 then it's a power of 3 as the smallest power of three is 1
+
+# Time Complexity - O(N) - Worst case scenerio the while loop has to iterate up to N. N being the number we are trying to check if is a power of 3.
+# Space Complexity - O(1) - The input is just a number and my varibles don't take that into account.
