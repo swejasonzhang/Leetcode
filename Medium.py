@@ -234,3 +234,60 @@ class Solution(object):
     
 # Time Complexity - O(N) - The while loop iterates through the whole string once to check for dups. In this case N refers to the length of the array
 # Space Complexity - O(N) - I am creating a set thus I am managing elements relative to the nums array. N refers to every element within the array
+
+# 1493. Longest Subarray of 1's After Deleting One Element
+
+# Approach: Use sliding window, use I and J. Use a zero counter. Set I at 0 and J to the range(len(nums)). If nums[J] == 0 then increment and there should only be one 0 at a time. Increment 1 and decrement zero count until only 1 zero exists.
+
+# Given a binary array nums, you should delete one element from it.
+# Return the size of the longest non-empty subarray containing only 1's in the resulting array. Return 0 if there is no such subarray.
+
+# Example 1:
+
+# Input: nums = [1,1,0,1]
+# Output: 3
+# Explanation: After deleting the number in position 2, [1,1,1] contains 3 numbers with value of 1's.
+
+# Example 2:
+
+# Input: nums = [0,1,1,1,0,1,1,0,1]
+# Output: 5
+# Explanation: After deleting the number in position 4, [0,1,1,1,1,1,0,1] longest subarray with value of 1's is [1,1,1,1,1].
+
+# Example 3:
+
+# Input: nums = [1,1,1]
+# Output: 2
+# Explanation: You must delete one element.
+ 
+# Constraints:
+
+# 1 <= nums.length <= 105
+# nums[i] is either 0 or 1.
+
+class Solution(object):
+    def longestSubarray(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+
+        result = 0
+        left = 0
+        zeros = 0
+
+        for right in range(len(nums)):
+            if nums[right] == 0: 
+                zeros += 1
+
+            while zeros > 1: # Only one zero should exist at a time so increment i until there are no more zeros
+                if nums[left] == 0:
+                    zeros-= 1
+                left += 1
+
+            result = max(result, right - left) # Take the indexs and substract to find the length and compare and store in result.
+
+        return result
+
+# Time Complexity - O(N) - The for loop iterates through the array once, and the while loop moves left at most N times, for a total of ≤ 2N operations. N being the number of elements within nums array.
+# Space Complexity - O(1) - My variables don't take up any space relative to the input size as they are constants.
