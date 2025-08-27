@@ -294,23 +294,20 @@ class Solution(object):
 # dimensions[i].length == 2
 # 1 <= dimensions[i][0], dimensions[i][1] <= 100
 
-import math
-
 class Solution(object):
     def areaOfMaxDiagonal(self, dimensions):
-        """
-        :type dimensions: List[List[int]]
-        :rtype: int
-        """
-        max_diagonal = 0
+        max_diag_sq = 0
         max_area = 0
 
         for length, width in dimensions:
-            diagonal = math.sqrt(length ** 2 + width ** 2)
+            diag_sq = length**2 + width**2
             area = length * width
 
-            if diagonal > max_diagonal or (diagonal == max_diagonal and area > max_area):
-                max_diagonal = diagonal
+            if diag_sq > max_diag_sq or (diag_sq == max_diag_sq and area > max_area):
+                max_diag_sq = diag_sq
                 max_area = area
 
         return max_area
+
+# Time Complexity: O(N) — We check each rectangle once, and all operations per rectangle take constant time.
+# Space Complexity: O(1) — We only use a fixed number of variables regardless of the number of rectangles.
