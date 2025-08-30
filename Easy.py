@@ -311,3 +311,44 @@ class Solution(object):
 
 # Time Complexity: O(N) — We check each rectangle once, and all operations per rectangle take constant time.
 # Space Complexity: O(1) — We only use a fixed number of variables regardless of the number of rectangles.
+
+# Given an integer n, return true if it is a power of two. Otherwise, return false.
+# An integer n is a power of two, if there exists an integer x such that n == 2x.
+
+# Approach: A number is a power of two if it can be divided by 2 repeatedly until only 1 remains. If any other factor exists, the process will end with a number greater than 1.
+
+# Example 1:
+
+# Input: n = 1
+# Output: true
+# Explanation: 20 = 1
+# Example 2:
+
+# Input: n = 16
+# Output: true
+# Explanation: 24 = 16
+# Example 3:
+
+# Input: n = 3
+# Output: false
+ 
+# Constraints:
+
+# -231 <= n <= 231 - 1
+
+class Solution(object):
+    def isPowerOfTwo(self, n):
+        """
+        :type n: int
+        :rtype: bool
+        """
+        if n <= 0:
+            return False
+        
+        while n % 2 == 0:
+            n = n // 2
+        
+        return n == 1
+    
+# Time Complexity: O(log n) — We repeatedly divide the number by 2 until it becomes 1, and each division takes constant time.
+# Space Complexity: O(1) — We only use a fixed number of variables regardless of the value of the number.
