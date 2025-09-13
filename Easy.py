@@ -354,3 +354,66 @@ class Solution(object):
     
 # Time Complexity: O(log n) — We repeatedly divide the number by 2 until it becomes 1, and each division takes constant time.
 # Space Complexity: O(1) — We only use a fixed number of variables regardless of the value of the number.
+
+# 3541. Find Most Frequent Vowel and Consonant
+
+# You are given a string s consisting of lowercase English letters ('a' to 'z').
+# Your task is to:
+
+# Find the vowel (one of 'a', 'e', 'i', 'o', or 'u') with the maximum frequency.
+# Find the consonant (all other letters excluding vowels) with the maximum frequency.
+# Return the sum of the two frequencies.
+
+# Note: If multiple vowels or consonants have the same maximum frequency, you may choose any one of them. If there are no vowels or no consonants in the string, consider their frequency as 0.
+# The frequency of a letter x is the number of times it occurs in the string.
+ 
+# Approach: Use a dictionary to count the frequency of each vowel and consonant. Then find the maximum frequency for both vowels and consonants and return their sum.
+
+# Example 1:
+# Input: s = "successes"
+# Output: 6
+
+# Explanation:
+
+# The vowels are: 'u' (frequency 1), 'e' (frequency 2). The maximum frequency is 2.
+# The consonants are: 's' (frequency 4), 'c' (frequency 2). The maximum frequency is 4.
+# The output is 2 + 4 = 6.
+
+# Example 2:
+# Input: s = "aeiaeia"
+# Output: 3
+
+# Explanation:
+
+# The vowels are: 'a' (frequency 3), 'e' ( frequency 2), 'i' (frequency 2). The maximum frequency is 3.
+# There are no consonants in s. Hence, maximum consonant frequency = 0.
+# The output is 3 + 0 = 3.
+ 
+# Constraints:
+
+# 1 <= s.length <= 100
+# s consists of lowercase English letters only.
+
+class Solution(object):
+    def maxFreqSum(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        
+        vowels = {"a": 0, "e": 0, "i": 0, "o": 0, "u": 0}
+        consonants = {}
+
+        for char in s:
+            if char in vowels:
+                vowels[char] += 1
+            else:
+                consonants[char] = consonants.get(char, 0) + 1
+
+        max_vowel = max(vowels.values()) if vowels else 0
+        max_consonant = max(consonants.values()) if consonants else 0
+
+        return max_vowel + max_consonant
+
+# Time Complexity: O(N) — We traverse the string once to count frequencies, where N is the length of the string.
+# Space Complexity: O(1) — The space used for the vowel dictionary is constant (5 entries), and the consonant dictionary can have at most 21 entries (the number of consonants in the English alphabet). Thus, the space complexity is considered O(1).
